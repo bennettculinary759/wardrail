@@ -4,14 +4,13 @@
   "description": "Static security scanner for MCP servers, agent skills, and instruction files.",
   "type": "module",
   "bin": {
-    "wardrail": "./dist/cli/index.js"
+    "wardrail": "dist/cli/index.js"
   },
   "exports": {
     ".": "./dist/index.js"
   },
   "files": [
     "dist",
-    "docs",
     "README.md",
     "LICENSE"
   ],

@@ -5,10 +5,10 @@
 **Catch leaked API keys, unsafe agent instructions, and dangerous MCP commands
 before they run or reach GitHub.**
 
-[中文](docs/README.zh-CN.md) ·
-[Vibe coding safety guide](docs/vibe-coding-safety.md) ·
-[Roadmap](docs/roadmap.md) ·
-[Contributing](CONTRIBUTING.md)
+[中文](https://github.com/3196973848/wardrail/blob/main/docs/README.zh-CN.md) ·
+[Vibe coding safety guide](https://github.com/3196973848/wardrail/blob/main/docs/vibe-coding-safety.md) ·
+[Roadmap](https://github.com/3196973848/wardrail/blob/main/docs/roadmap.md) ·
+[Contributing](https://github.com/3196973848/wardrail/blob/main/CONTRIBUTING.md)
 
 [![CI](https://github.com/3196973848/wardrail/actions/workflows/ci.yml/badge.svg)](https://github.com/3196973848/wardrail/actions/workflows/ci.yml)
 [![GitHub stars](https://img.shields.io/github/stars/3196973848/wardrail?style=flat)](https://github.com/3196973848/wardrail/stargazers)
@@ -17,7 +17,7 @@ before they run or reach GitHub.**
 ![Offline by default](https://img.shields.io/badge/scan-local%20%26%20offline-6f42c1)
 [![npm version](https://img.shields.io/npm/v/wardrail)](https://www.npmjs.com/package/wardrail)
 
-![Wardrail catches an API key before commit](docs/assets/wardrail-demo.gif)
+![Wardrail catches an API key before commit](https://raw.githubusercontent.com/3196973848/wardrail/main/docs/assets/wardrail-demo.gif)
 
 ## Why Wardrail?
 
@@ -134,7 +134,7 @@ npx wardrail scan --format sarif --output wardrail.sarif
 ```
 
 SARIF 2.1.0 findings can be uploaded to GitHub Code Scanning. See the
-[working workflow](docs/github-code-scanning.md).
+[working workflow](https://github.com/3196973848/wardrail/blob/main/docs/github-code-scanning.md).
 
 ### Adopt it without fixing everything today
 
@@ -207,7 +207,7 @@ Wardrail v0.2.0 is a tested, usable release:
 - Node.js 20, 22, and 24 CI
 - static, local, offline-by-default scanning
 
-See the [public roadmap](docs/roadmap.md) for Git-history scanning,
+See the [public roadmap](https://github.com/3196973848/wardrail/blob/main/docs/roadmap.md) for Git-history scanning,
 cross-file data flow, more ecosystems, and rule plugins.
 
 ## Help build the safety net
@@ -219,7 +219,8 @@ Good first contributions include:
 - support for another agent configuration format;
 - clearer remediation text for beginners.
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) or open a structured rule request.
+Read [CONTRIBUTING.md](https://github.com/3196973848/wardrail/blob/main/CONTRIBUTING.md)
+or open a structured rule request.
 
 If Wardrail would have saved you from one leaked key, consider starring the
 repository. It helps more new builders discover the safety check before their
