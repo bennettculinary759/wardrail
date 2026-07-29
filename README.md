@@ -5,6 +5,10 @@
 **Catch leaked API keys, unsafe agent instructions, and dangerous MCP commands
 before they run or reach GitHub.**
 
+Built for vibe coding beginners using Cursor, Claude Code, Codex, and MCP
+tools. Wardrail scans locally, explains every finding, and never uploads your
+source code.
+
 [中文](https://github.com/3196973848/wardrail/blob/main/docs/README.zh-CN.md) ·
 [Vibe coding safety guide](https://github.com/3196973848/wardrail/blob/main/docs/vibe-coding-safety.md) ·
 [Roadmap](https://github.com/3196973848/wardrail/blob/main/docs/roadmap.md) ·
@@ -42,11 +46,17 @@ never executes the project being scanned.
 
 ## Try it in one minute
 
-Install Wardrail in the project you want to protect:
+Run Wardrail inside any project—no account or configuration required:
+
+```bash
+npx wardrail scan
+npx wardrail scan --history
+```
+
+Add permanent pre-commit protection when you are ready:
 
 ```bash
 npm install --save-dev wardrail
-npx wardrail scan
 npx wardrail hook install
 ```
 

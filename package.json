@@ -1,7 +1,7 @@
 {
   "name": "wardrail",
   "version": "0.3.0",
-  "description": "Static security scanner for MCP servers, agent skills, and instruction files.",
+  "description": "Local security scanner for vibe-coded apps: catch API keys, Git-history secrets, unsafe MCP, and AI agent instructions before commit.",
   "type": "module",
   "bin": {
     "wardrail": "dist/cli/index.js"
@@ -31,11 +31,24 @@
   },
   "keywords": [
     "ai-agent",
+    "ai-agent-security",
+    "ai-security",
+    "api-key",
+    "claude-code",
+    "codex",
+    "cursor",
+    "git-history",
     "mcp",
+    "mcp-security",
+    "pre-commit",
+    "prompt-injection",
+    "secret-scanner",
+    "secrets-scanning",
     "security",
     "static-analysis",
-    "codex",
-    "claude"
+    "supply-chain-security",
+    "vibe-coding",
+    "vibecoding"
   ],
   "repository": {
     "type": "git",

@@ -5,6 +5,9 @@
 Wardrail 在代码运行或进入 GitHub 之前，发现 API Key 泄露、前端密钥暴露、
 危险 Agent 指令和高风险 MCP 命令。
 
+它特别适合使用 Cursor、Claude Code、Codex 和 MCP 工具的 vibecoding
+新手：所有扫描都在本地完成，每个问题都有通俗解释，源代码不会上传。
+
 [English README](../README.md) ·
 [新手密钥安全指南](vibe-coding-safety.md) ·
 [开发路线图](roadmap.md)
@@ -28,16 +31,22 @@ DATABASE_URL=postgres://user:***@host/app
 - 只删除代码，却没有撤销已经泄露的密钥；
 - 直接运行 AI 推荐的 MCP、Skill 或远程安装命令。
 
-Wardrail不会只说“有风险”，还会告诉用户风险位置、原因和修复方式，并在输出前
+Wardrail 不会只说“有风险”，还会告诉用户风险位置、原因和修复方式，并在输出前
 自动隐藏完整密钥。
 
 ## 一分钟保护项目
 
-在需要保护的项目中安装 Wardrail：
+进入任意项目目录即可扫描，无需注册账号或编写配置：
+
+```bash
+npx wardrail scan
+npx wardrail scan --history
+```
+
+需要持续保护时，再安装提交前检查：
 
 ```bash
 npm install --save-dev wardrail
-npx wardrail scan
 npx wardrail hook install
 ```
 
