@@ -19,6 +19,8 @@ jobs:
           - 24
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
@@ -28,3 +30,26 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: node dist/cli/index.js scan . --no-color
+      - run: node dist/cli/index.js scan . --history --no-color
+
+  platform-smoke:
+    name: Platform smoke (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: node dist/cli/index.js --version
+      - run: node dist/cli/index.js scan . --history --no-color

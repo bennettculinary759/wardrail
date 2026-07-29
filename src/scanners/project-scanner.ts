@@ -12,11 +12,15 @@ import {
   type Severity,
 } from "../types/index.js";
 import { discoverFiles } from "./file-discovery.js";
+import { scanGitHistory } from "./git-history.js";
+import { WARDRAIL_VERSION } from "../version.js";
 
 export interface ScanOptions {
   now?: Date;
   files?: string[];
   useBaseline?: boolean;
+  history?: boolean;
+  historyMaxCommits?: number;
 }
 
 function emptySeverityCounts(): Record<Severity, number> {
@@ -94,6 +98,19 @@ export async function scanProject(
     }
   }
 
+  const history = options.history
+    ? await scanGitHistory(root, config, ignoredRules, {
+        maxCommits: options.historyMaxCommits ?? 100,
+      })
+    : {
+        findings: [],
+        filesScanned: 0,
+        commitsScanned: 0,
+        truncated: false,
+        shallowRepository: false,
+      };
+  findings.push(...history.findings);
+
   const baseline =
     options.useBaseline === false
       ? new Set<string>()
@@ -122,11 +139,15 @@ export async function scanProject(
   }
 
   return {
-    version: "0.2.0",
+    version: WARDRAIL_VERSION,
     root,
     scannedAt: (options.now ?? new Date()).toISOString(),
     summary: {
-      filesScanned,
+      filesScanned: filesScanned + history.filesScanned,
+      historyFilesScanned: history.filesScanned,
+      commitsScanned: history.commitsScanned,
+      historyTruncated: history.truncated,
+      shallowRepository: history.shallowRepository,
       findings: activeFindings.length,
       baselineSuppressed,
       bySeverity,

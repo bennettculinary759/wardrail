@@ -12,6 +12,7 @@ import {
   uninstallPreCommitHook,
 } from "../integrations/git-hook.js";
 import { builtinRules, findRule } from "../rules/builtin.js";
+import { historyRules } from "../rules/history.js";
 import { builtinProjectRules } from "../rules/project.js";
 import { formatJsonReport } from "../reporters/json.js";
 import { formatSarifReport } from "../reporters/sarif.js";
@@ -19,14 +20,23 @@ import { formatTerminalReport } from "../reporters/terminal.js";
 import { scanProject } from "../scanners/project-scanner.js";
 import { getStagedFiles } from "../scanners/staged-files.js";
 import { severityOrder, type Severity } from "../types/index.js";
+import { WARDRAIL_VERSION } from "../version.js";
 
 const program = new Command();
 const validSeverities = Object.keys(severityOrder) as Severity[];
 
+function parseHistoryLimit(value: string): number {
+  const parsed = Number(value);
+  if (!Number.isSafeInteger(parsed) || parsed < 1 || parsed > 10_000) {
+    throw new Error("History limit must be an integer between 1 and 10000.");
+  }
+  return parsed;
+}
+
 program
   .name("wardrail")
   .description("Scan source code and agent configuration before your AI agent runs it.")
-  .version("0.2.0");
+  .version(WARDRAIL_VERSION);
 
 program
   .command("scan")
@@ -36,12 +46,20 @@ program
   .option("-o, --output <file>", "write the report to a file")
   .option("--fail-on <severity>", "minimum severity that produces exit code 1", "low")
   .option("--staged", "scan only files staged in Git")
+  .option("--history", "also scan committed Git history for leaked secrets")
+  .option(
+    "--history-limit <commits>",
+    "maximum recent commits to scan with --history",
+    "100",
+  )
   .option("--no-color", "disable colored terminal output")
   .action(async (target: string, options: {
     format: string;
     failOn: string;
     color: boolean;
     staged?: boolean;
+    history?: boolean;
+    historyLimit: string;
     output?: string;
   }) => {
     if (!["terminal", "json", "sarif"].includes(options.format)) {
@@ -50,13 +68,22 @@ program
     if (!validSeverities.includes(options.failOn as Severity)) {
       throw new Error(`Unsupported severity: ${options.failOn}`);
     }
+    if (options.staged && options.history) {
+      throw new Error("--staged and --history cannot be used together.");
+    }
+    const historyMaxCommits = parseHistoryLimit(options.historyLimit);
 
     const selectedFiles = options.staged
       ? await getStagedFiles(target)
       : undefined;
     const report = await scanProject(
       target,
-      selectedFiles ? { files: selectedFiles } : {},
+      {
+        ...(selectedFiles ? { files: selectedFiles } : {}),
+        ...(options.history
+          ? { history: true, historyMaxCommits }
+          : {}),
+      },
     );
     let rendered: string;
     if (options.format === "json") {
@@ -112,7 +139,7 @@ rules
   .command("list")
   .description("List built-in rules")
   .action(() => {
-    const rules = [...builtinRules, ...builtinProjectRules].sort((left, right) =>
+    const rules = [...builtinRules, ...builtinProjectRules, ...historyRules].sort((left, right) =>
       left.metadata.id.localeCompare(right.metadata.id),
     );
     for (const { metadata } of rules) {

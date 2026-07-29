@@ -1,4 +1,5 @@
 import { builtinRules } from "../rules/builtin.js";
+import { historyRules } from "../rules/history.js";
 import { builtinProjectRules } from "../rules/project.js";
 import type { ScanReport, Severity } from "../types/index.js";
 
@@ -22,7 +23,7 @@ export function formatSarifReport(report: ScanReport): string {
             name: "Wardrail",
             version: report.version,
             informationUri: "https://github.com/3196973848/wardrail",
-            rules: [...builtinRules, ...builtinProjectRules].map(({ metadata }) => ({
+            rules: [...builtinRules, ...builtinProjectRules, ...historyRules].map(({ metadata }) => ({
               id: metadata.id,
               name: metadata.title.replaceAll(/\s+/g, ""),
               shortDescription: { text: metadata.title },
@@ -59,6 +60,9 @@ export function formatSarifReport(report: ScanReport): string {
           partialFingerprints: {
             primaryLocationLineHash: finding.fingerprint,
           },
+          ...(finding.commit
+            ? { properties: { gitCommit: finding.commit } }
+            : {}),
         })),
       },
     ],

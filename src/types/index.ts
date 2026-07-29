@@ -29,16 +29,22 @@ export interface Finding {
   remediation: string;
   references: string[];
   fingerprint: string;
+  commit?: string;
 }
 
 export interface ScanFile {
   absolutePath: string;
   relativePath: string;
   content: string;
+  commit?: string;
 }
 
 export interface ScanSummary {
   filesScanned: number;
+  historyFilesScanned: number;
+  commitsScanned: number;
+  historyTruncated: boolean;
+  shallowRepository: boolean;
   findings: number;
   baselineSuppressed: number;
   bySeverity: Record<Severity, number>;

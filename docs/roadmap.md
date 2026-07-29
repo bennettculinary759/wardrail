@@ -5,17 +5,19 @@ MCP configurations, and AI agent projects.
 
 ## Now: reliable local protection
 
-- 15 explainable rules
+- 17 explainable rules
 - source, `.env`, MCP, Skill, instruction, shell, and Docker scanning
 - terminal, JSON, and SARIF output
 - staged-file pre-commit checks
+- bounded, read-only Git-history secret scanning
+- Linux, Windows, and macOS history-scan smoke tests
 - GitHub Code Scanning integration
 - baselines and narrow inline suppressions
 - offline-by-default operation
 
 ## Next: better secret coverage
 
-- Git-history and commit-range scanning
+- configurable commit-range scanning
 - entropy-assisted generic-token detection
 - more provider-specific key formats
 - framework-aware public environment rules
@@ -36,7 +38,7 @@ MCP configurations, and AI agent projects.
 - stable public rule API
 - versioned configuration schema
 - performance benchmarks on large repositories
-- Windows, macOS, and Linux installation testing
+- published-package installation tests across supported platforms
 - VS Code diagnostics
 - documented compatibility and deprecation policy
 

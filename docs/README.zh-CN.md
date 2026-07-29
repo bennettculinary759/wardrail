@@ -63,6 +63,7 @@ git commit
 
 - OpenAI、Anthropic、AWS、GitHub、Google、Stripe、Slack 等密钥格式；
 - 通用硬编码 API Key、Token、密码和私钥；
+- 删除后仍留在 Git 历史中的已知和通用密钥；
 - `.env` 包含敏感值但未加入 `.gitignore`；
 - `VITE_*`、`NEXT_PUBLIC_*`、`REACT_APP_*` 前端密钥暴露；
 - 日志、Authorization Header、数据库 URL 和 Docker 中的密钥；
@@ -72,7 +73,7 @@ git commit
 - 绕过用户确认、安全规则和不可见 Unicode 指令；
 - `latest`、`main` 等未固定供应链来源。
 
-目前包含 `WR-001`～`WR-015` 共 15 条规则：
+目前包含 `WR-001`～`WR-017` 共 17 条规则：
 
 ```bash
 npx wardrail rules list
@@ -97,6 +98,22 @@ Wardrail默认：
 ```bash
 npx wardrail scan --staged
 ```
+
+检查已经提交、后来又从当前文件删除的密钥：
+
+```bash
+npx wardrail scan --history
+```
+
+默认同时扫描当前文件和最近 100 个提交。整个过程只读取 Git 对象，不切换版本，
+也不执行历史代码。需要扩大范围时：
+
+```bash
+npx wardrail scan --history --history-limit 1000
+```
+
+报告会显示对应提交哈希，但不会输出完整密钥。如果发现真实密钥，应先撤销或轮换；
+仅重写 Git 历史不能让已经泄露的密钥重新变安全。
 
 生成 GitHub Code Scanning 使用的 SARIF：
 

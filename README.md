@@ -70,11 +70,12 @@ risk → commit stops with an explanation
 
 ## The problems it catches
 
-Wardrail currently ships with 15 explainable rules:
+Wardrail currently ships with 17 explainable rules:
 
 | Area | Examples |
 |---|---|
 | API keys and tokens | OpenAI, Anthropic, AWS, GitHub, Google, Stripe, Slack and generic secrets |
+| Git history | Known and generic credentials that remain in earlier commits after deletion |
 | Frontend exposure | Secrets placed in `VITE_*`, `NEXT_PUBLIC_*`, or `REACT_APP_*` |
 | Environment files | Sensitive `.env` files missing from `.gitignore` |
 | Accidental disclosure | Secrets in logs, Authorization headers, database URLs, and Docker layers |
@@ -83,7 +84,7 @@ Wardrail currently ships with 15 explainable rules:
 | Dangerous commands | Remote download-and-execute, destructive deletion, and encoded PowerShell |
 | Supply chain | Mutable branches, `latest` releases, and unpinned install commands |
 
-Run `npx wardrail rules list` to see `WR-001` through `WR-015`, or:
+Run `npx wardrail rules list` to see `WR-001` through `WR-017`, or:
 
 ```bash
 npx wardrail explain WR-007
@@ -126,6 +127,26 @@ npx wardrail hook install
 
 Hook installation is idempotent. Existing shell-hook commands are preserved,
 and non-shell hooks are never overwritten.
+
+### Find keys that were already committed
+
+Deleting a key from the current file does not remove it from Git history:
+
+```bash
+npx wardrail scan --history
+```
+
+The history scan checks the working tree plus the latest 100 commits by
+default. It reads Git objects without checking out or executing historical
+code. Increase the bounded depth when needed:
+
+```bash
+npx wardrail scan --history --history-limit 1000
+```
+
+Findings include the commit hash while keeping credential evidence redacted.
+If a real key is found, revoke or rotate it first. Rewriting history alone
+does not make an exposed credential safe.
 
 ### Scan in CI
 
@@ -198,17 +219,18 @@ been exposed.
 
 ## Project status
 
-Wardrail v0.2.0 is a tested, usable release:
+Wardrail v0.3.0 is a tested, usable release:
 
-- 15 built-in security rules
+- 17 built-in security rules
+- bounded, read-only Git-history secret scanning
 - terminal, JSON, and SARIF output
 - pre-commit and GitHub Code Scanning integration
 - baseline and inline suppression support
 - Node.js 20, 22, and 24 CI
 - static, local, offline-by-default scanning
 
-See the [public roadmap](https://github.com/3196973848/wardrail/blob/main/docs/roadmap.md) for Git-history scanning,
-cross-file data flow, more ecosystems, and rule plugins.
+See the [public roadmap](https://github.com/3196973848/wardrail/blob/main/docs/roadmap.md)
+for deeper data flow, more ecosystems, and rule plugins.
 
 ## Help build the safety net
 
@@ -233,9 +255,11 @@ first accidental push.
 - Secret-like evidence is redacted before reporting.
 - No source code is uploaded and no network or model access is required.
 - A clean report does not prove that a project or agent is safe.
-- Git-history scanning and full cross-file data flow are not implemented yet.
+- Git-history coverage is bounded to reachable commits and text blobs; full
+  cross-file data flow is not implemented yet.
 
-Report vulnerabilities through [SECURITY.md](SECURITY.md).
+Report vulnerabilities through
+[SECURITY.md](https://github.com/3196973848/wardrail/blob/main/SECURITY.md).
 
 ## License
 

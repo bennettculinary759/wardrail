@@ -82,6 +82,17 @@ credential.
 4. Review provider usage and billing.
 5. Add a pre-commit and CI check to prevent recurrence.
 
+Wardrail can check recent committed versions even after the current file was
+cleaned:
+
+```bash
+npx wardrail scan --history
+```
+
+It scans the latest 100 commits by default. Use `--history-limit 1000` when a
+deeper check is appropriate. A history finding identifies where the value
+remains, but rotation is still the first response.
+
 ## What Wardrail checks
 
 Wardrail detects common credential formats, generic secret assignments,
@@ -92,9 +103,11 @@ It runs locally and redacts evidence before reporting.
 
 ## What it cannot guarantee
 
-Wardrail does not currently scan full Git history, binary files, screenshots,
-or heavily obfuscated values. A clean result is a useful safety check, not a
-proof that no secret has ever been exposed.
+Wardrail scans a bounded number of Git commits and reports when the limit or a
+shallow clone prevents complete coverage. It does not scan binary files,
+screenshots, unreachable Git objects, or heavily obfuscated values. A clean
+result is a useful safety check, not proof that no secret has ever been
+exposed.
 
 ## Further reading
 

@@ -39,6 +39,27 @@
       "sourceMaps": true
     },
     {
+      "name": "Wardrail: 扫描 Git 历史密钥",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      "program": "${workspaceFolder}/node_modules/tsx/dist/cli.mjs",
+      "args": [
+        "src/cli/index.ts",
+        "scan",
+        ".",
+        "--history",
+        "--history-limit",
+        "100"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "sourceMaps": true
+    },
+    {
       "name": "Wardrail: 扫描危险示例",
       "type": "node",
       "request": "launch",

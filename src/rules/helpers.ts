@@ -40,6 +40,7 @@ export function createFinding(
     remediation: metadata.remediation,
     references: metadata.references,
     fingerprint,
+    ...(file.commit ? { commit: file.commit } : {}),
   };
 }
 
