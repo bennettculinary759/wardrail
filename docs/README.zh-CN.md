@@ -33,7 +33,7 @@ Wardrail不会只说“有风险”，还会告诉用户风险位置、原因和
 
 ## 一分钟保护项目
 
-首个 npm 公开版本发布后：
+在需要保护的项目中安装 Wardrail：
 
 ```bash
 npm install --save-dev wardrail
@@ -41,7 +41,7 @@ npx wardrail scan
 npx wardrail hook install
 ```
 
-当前可以直接在本仓库体验：
+参与开发或在本地运行当前仓库：
 
 ```bash
 npm install

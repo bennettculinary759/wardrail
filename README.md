@@ -15,7 +15,7 @@ before they run or reach GitHub.**
 ![Node.js 20+](https://img.shields.io/badge/Node.js-20%2B-339933)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue)
 ![Offline by default](https://img.shields.io/badge/scan-local%20%26%20offline-6f42c1)
-![Status: pre-release](https://img.shields.io/badge/status-pre--release-orange)
+[![npm version](https://img.shields.io/npm/v/wardrail)](https://www.npmjs.com/package/wardrail)
 
 ![Wardrail catches an API key before commit](docs/assets/wardrail-demo.gif)
 
@@ -42,7 +42,7 @@ never executes the project being scanned.
 
 ## Try it in one minute
 
-The npm command is prepared for the first public release:
+Install Wardrail in the project you want to protect:
 
 ```bash
 npm install --save-dev wardrail
@@ -50,7 +50,7 @@ npx wardrail scan
 npx wardrail hook install
 ```
 
-To try the current repository before that release:
+To contribute or run the repository locally:
 
 ```bash
 npm install
@@ -198,7 +198,7 @@ been exposed.
 
 ## Project status
 
-Wardrail is a tested pre-release:
+Wardrail v0.2.0 is a tested, usable release:
 
 - 15 built-in security rules
 - terminal, JSON, and SARIF output
