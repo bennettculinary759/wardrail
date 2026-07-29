@@ -1,0 +1,11 @@
+{
+  "folders": [
+    {
+      "name": "Wardrail",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "typescript.tsdk": "node_modules/typescript/lib"
+  }
+}

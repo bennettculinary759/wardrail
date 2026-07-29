@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title description">
+  <title id="title">Wardrail catches an API key before commit</title>
+  <desc id="description">A terminal window showing Wardrail detecting and redacting a leaked API key before a Git commit.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="1" stop-color="#151b26"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000" flood-opacity=".34"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="560" rx="32" fill="#f4f1ff"/>
+  <circle cx="1080" cy="74" r="180" fill="#e8ddff"/>
+  <circle cx="110" cy="520" r="220" fill="#dff8ed"/>
+
+  <g filter="url(#shadow)">
+    <rect x="88" y="62" width="1024" height="436" rx="18" fill="url(#background)"/>
+    <rect x="88" y="62" width="1024" height="54" rx="18" fill="#202938"/>
+    <rect x="88" y="98" width="1024" height="18" fill="#202938"/>
+  </g>
+
+  <circle cx="122" cy="89" r="7" fill="#ff6b6b"/>
+  <circle cx="147" cy="89" r="7" fill="#ffd166"/>
+  <circle cx="172" cy="89" r="7" fill="#5bd9a1"/>
+  <text x="600" y="95" text-anchor="middle" fill="#9da7b7" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="17">wardrail — pre-commit safety check</text>
+
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="20">
+    <text x="126" y="158" fill="#5bd9a1">$</text>
+    <text x="150" y="158" fill="#f0f4fa">git commit -m "ship my app"</text>
+
+    <text x="126" y="204" fill="#c9d1d9">Wardrail Security Report</text>
+
+    <rect x="126" y="232" width="116" height="30" rx="6" fill="#d73a49"/>
+    <text x="138" y="254" fill="#fff" font-weight="700">CRITICAL</text>
+    <text x="260" y="254" fill="#aab4c3">src/config.ts:3:19</text>
+
+    <text x="126" y="300" fill="#ff9aa5" font-weight="700">WR-001: Known credential format</text>
+    <text x="126" y="338" fill="#c9d1d9">Evidence: OPENAI_API_KEY=</text>
+    <text x="437" y="338" fill="#ffd166">&lt;redacted-token&gt;</text>
+    <text x="126" y="376" fill="#c9d1d9">Fix: rotate the key and keep it server-side.</text>
+
+    <text x="126" y="428" fill="#ff9aa5">Commit stopped before the key reached Git history.</text>
+    <text x="126" y="468" fill="#7ee2ae">Local scan</text>
+    <text x="260" y="468" fill="#657084">•</text>
+    <text x="282" y="468" fill="#7ee2ae">No upload</text>
+    <text x="420" y="468" fill="#657084">•</text>
+    <text x="442" y="468" fill="#7ee2ae">No AI required</text>
+  </g>
+</svg>

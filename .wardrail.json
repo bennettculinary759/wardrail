@@ -1,0 +1,12 @@
+{
+  "ignore": [
+    "examples/**",
+    "tests/**",
+    "src/rules/**",
+    "work/**",
+    "outputs/**"
+  ],
+  "ignoreRules": [],
+  "maxFileSize": 1048576,
+  "baseline": ".wardrail-baseline.json"
+}
